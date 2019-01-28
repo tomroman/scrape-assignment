@@ -100,15 +100,7 @@ app.post("/articles/:id", function (req, res) {
         });
 });
 
-app.delete("/articles/:id", function (req, res) {
-    db.Article.remove({ _id: req.params.id })
-        .then(function (dbArticle) {
-            res.json(dbArticle);
-        })
-        .catch(function (err) {
-            res.json(err);
-        });
-});
+
 
 app.listen(PORT, function () {
     console.log("App running on port " + PORT + "!");
