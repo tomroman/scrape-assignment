@@ -41,6 +41,7 @@ app.get("/scrape", function (req, res) {
             result.url = $(element).children("a").attr("href");
             result.headline = $(element).children("a").children("h2.css-1dq8tca").text();
             result.summary = $(element).children("a").children("p.css-1echdzn").text();
+            result.photo = $(element).find("img").attr("src");
 
             if (result.headline && result.url) {
                 db.Article.create(result)
@@ -57,13 +58,17 @@ app.get("/scrape", function (req, res) {
 });
 
 app.get("/articles", function (req, res) {
-    db.Article.find({})
+    db.Article.find({saved: false})
         .then(function (dbArticle) {
             res.json(dbArticle);
         })
         .catch(function (err) {
             res.json(err);
         });
+});
+
+app.get("/saved", function ( req, res) {
+    res.sendfile("./public/saved.html");
 });
 
 app.get("/articles/:id", function (req, res) {
@@ -99,6 +104,8 @@ app.post("/articles/:id", function (req, res) {
             res.json(err);
         });
 });
+
+
 
 
 
