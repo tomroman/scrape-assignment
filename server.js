@@ -67,9 +67,11 @@ app.get("/articles", function (req, res) {
         });
 });
 
-app.get("/saved", function ( req, res) {
+app.get("/saved", function ( req, res ) {
     res.sendfile("./public/saved.html");
 });
+
+
 
 app.get("/articles/:id", function (req, res) {
     db.Article.findOne({ _id: req.params.id })
