@@ -71,6 +71,14 @@ app.get("/saved", function ( req, res ) {
     res.sendfile("./public/saved.html");
 });
 
+app.get("/articles/saved", function (req, res) {
+    db.Article.find({ saved: true }).then(function (dbArticle) {
+        res.json(dbArticle);
+    }).catch(function (err) {
+        res.json(err);
+    });
+});
+
 
 
 app.get("/articles/:id", function (req, res) {
