@@ -1,16 +1,16 @@
-var express = require ("express");
-var cheerio = require("cheerio");
-var logger = require("morgan");
-var axios = require("axios");
-var mongoose = require("mongoose");
-var db = require("./models");
+let express = require ("express");
+let cheerio = require("cheerio");
+let logger = require("morgan");
+let axios = require("axios");
+let mongoose = require("mongoose");
+let db = require("./models");
 
 
-var db = require("./models");
 
-var PORT = process.env.PORT || 3000;
 
-var app = express();
+let PORT = process.env.PORT || 3000;
+
+let app = express();
 
 app.use(logger("dev"));
 
@@ -21,7 +21,7 @@ app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost/newsScraper", { useNewUrlParser: true });
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 mongoose.connect(MONGODB_URI);
 
