@@ -2,16 +2,16 @@ $(document).ready(function () {
 
     function displayArticles() {
         $.getJSON("/articles", function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var artDiv = $("<div>")
+            for (let i = 0; i < data.length; i++) {
+                let artDiv = $("<div>")
                 artDiv.attr("id", data[i]._id)
                 artDiv.addClass("panel panel-default")
 
-                var artHeading = $("<div class='panel-heading' ></div>")
+                let artHeading = $("<div class='panel-heading' ></div>")
 
-                var artTitle = $("<h3 class='panel-title' ></h3>")
+                let artTitle = $("<h3 class='panel-title' ></h3>")
 
-                var newArtTag = $("<a class='article-title'>");
+                let newArtTag = $("<a class='article-title'>");
                 newArtTag.attr("target", "_blank")
                 newArtTag.attr("href", `https://www.nytimes.com${data[i].url}`)
                 newArtTag.text(data[i].headline)
@@ -37,7 +37,7 @@ $(document).ready(function () {
     displayArticles()
 
     $(document).on("click", ".note-button", function () {
-        var thisId = $(this).attr("data-id");
+        let thisId = $(this).attr("data-id");
         $.ajax({
             method: "GET",
             url: "/articles/" + thisId
