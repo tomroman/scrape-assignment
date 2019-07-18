@@ -79,6 +79,14 @@ app.get("/articles/saved", function (req, res) {
     });
 });
 
+app.delete("/articles/clear", function (req, res) {
+    db.Article.deleteMany({}, function (err) {
+        console.log(err);
+    });
+    db.Note.deleteMany({}, function (err) {
+        console.log(err);
+    });
+})
 
 
 app.get("/articles/:id", function (req, res) {
