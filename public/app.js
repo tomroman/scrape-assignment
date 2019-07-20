@@ -68,6 +68,21 @@ $(document).ready(function () {
             displayArticles()
         });
     });
+    
+    function getNotes(id) {
+        $.get("/articles/" + id).then(function (data) {
+            showNotes(data[0].note, id);
+        });
+    }
+
+    $(document).on("click", ".delete-note", function () {
+        $.ajax({
+            method: "DELETE",
+            url: "/note/delete"
+        }).then(function (data) {
+
+        });
+    })
 
 
 })
