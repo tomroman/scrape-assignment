@@ -68,7 +68,15 @@ $(document).ready(function () {
             displayArticles()
         });
     });
-    
+
+    $(document).on("click", ".scrape-new", function () {
+        $.get("/scrape").then(function (data) {
+            console.log(data);
+            getArticles();
+            location.reload();
+        });
+    });
+
     function getNotes(id) {
         $.get("/articles/" + id).then(function (data) {
             showNotes(data[0].note, id);
