@@ -48,7 +48,16 @@ $(document).ready(function () {
             }
         });
     }
-    displayArticles()
+
+    function showArticles(articles) {
+        for (var i = 0; i < articles.length; i++) {
+
+            var articleCard = `<div class="card" data-id="${articles[i]._id}" ><div class="card-header"><h3><a class="article-link" target="_blank" href="${articles[i].url}">${articles[i].headline}</a></h3><h4><a class="btn btn-success save">Save Article</a><a class="btn btn-info notes">Article Notes</a></h4></div><div class="card-body"><div class='row'><div>${articles[i].summary}</div></div></div></div>`
+
+            $("#articles").append(articleCard);
+        }
+    }
+   
 
     $(document).on("click", ".note-button", function () {
         let thisId = $(this).attr("data-id");
@@ -105,6 +114,8 @@ $(document).ready(function () {
 
         });
     })
+
+    getArticles();
 
 
 })
