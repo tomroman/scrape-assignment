@@ -1,36 +1,50 @@
 $(document).ready(function () {
 
-    function displayArticles() {
-        $.getJSON("/articles", function (data) {
-            for (let i = 0; i < data.length; i++) {
-                let artDiv = $("<div>")
-                artDiv.attr("id", data[i]._id)
-                artDiv.addClass("panel panel-default")
+    // function displayArticles() {
+    //     $.getJSON("/articles", function (data) {
+    //         for (let i = 0; i < data.length; i++) {
+    //             let artDiv = $("<div>")
+    //             artDiv.attr("id", data[i]._id)
+    //             artDiv.addClass("panel panel-default")
 
-                let artHeading = $("<div class='panel-heading' ></div>")
+    //             let artHeading = $("<div class='panel-heading' ></div>")
 
-                let artTitle = $("<h3 class='panel-title' ></h3>")
+    //             let artTitle = $("<h3 class='panel-title' ></h3>")
 
-                let newArtTag = $("<a class='article-title'>");
-                newArtTag.attr("target", "_blank")
-                newArtTag.attr("href", `https://www.nytimes.com${data[i].url}`)
-                newArtTag.text(data[i].headline)
+    //             let newArtTag = $("<a class='article-title'>");
+    //             newArtTag.attr("target", "_blank")
+    //             newArtTag.attr("href", `https://www.nytimes.com${data[i].url}`)
+    //             newArtTag.text(data[i].headline)
 
-                artTitle.append(newArtTag)
-                artHeading.append(artTitle)
-                artDiv.append(artHeading)
-                artDiv.append(data[i].summary)
-                if (data[i].isSaved) {
-                    artTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-warning delete-button'>" + "Delete Article" + "</button>");
-                    artTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-success note-button'>" + "Article Notes" + "</button>");
+    //             artTitle.append(newArtTag)
+    //             artHeading.append(artTitle)
+    //             artDiv.append(artHeading)
+    //             artDiv.append(data[i].summary)
+    //             if (data[i].isSaved) {
+    //                 artTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-warning delete-button'>" + "Delete Article" + "</button>");
+    //                 artTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-success note-button'>" + "Article Notes" + "</button>");
                     
-                }
-                else {
-                    artTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-primary save-button'>" + "Save" + "</button>");
-                    $("#articles").append(artDiv)
+    //             }
+    //             else {
+    //                 artTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-primary save-button'>" + "Save" + "</button>");
+    //                 $("#articles").append(artDiv)
 
-                }
+    //             }
 
+    //         }
+
+  
+
+    //     });
+    // }
+
+    function getArticles() {
+        $.getJSON("/articles").then(function (data) {
+            $("#articles").empty();
+            if (data && data.length) {
+                showArticles(data);
+            } else {
+                alertEmpty();
             }
         });
     }
