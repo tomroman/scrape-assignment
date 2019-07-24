@@ -57,6 +57,26 @@ $(document).ready(function () {
             $("#articles").append(articleCard);
         }
     }
+
+    function showNotes(notes, id) {
+
+        $("#notes").empty();
+
+        var input = "<h2 class='text-center'>Leave a Note</h2>";
+        input += "<form>";
+        input += "<input data-id='" + id + "' type='text' placeholder='note' class='note-input'></input>";
+        input += "<button type='submit' class='submit-note'>Submit</button>";
+        input += "</form>";
+
+
+        $("#notes").append(input);
+
+        for (var i = 0; i < notes.length; i++) {
+            var noteCard = `<div class="card" data-id="${id}"><div class="card-body">${notes[i].text}</div></div></div>`
+
+            $("#notes").append(noteCard);
+        }
+    }
    
 
     $(document).on("click", ".note-button", function () {
