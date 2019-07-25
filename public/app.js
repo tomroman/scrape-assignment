@@ -77,7 +77,11 @@ $(document).ready(function () {
             $("#notes").append(noteCard);
         }
     }
-   
+    function alertEmpty() {
+        var message = "<h4>Uh Oh. Looks like we don't have any new articles.</h4><div class='card-body text-center'><h4><a href='/saved' class='btn'>Go to Saved Articles</a></h4></div>";
+
+        $("#articles").append(message);
+    }
 
     $(document).on("click", ".note-button", function () {
         let thisId = $(this).attr("data-id");
