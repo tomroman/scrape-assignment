@@ -105,6 +105,19 @@ $(document).ready(function () {
             });
     });
 
+    $(document).on("click", ".submit-note", function (event) {
+        event.preventDefault();
+
+        var id = $(".note-input").data().id;
+        var text = $(".note-input").val();
+        $(".note-input").val("")
+
+        $.post("/articles/" + id, { text: text }).then(function (data) {
+            getNotes(id);
+        }).catch(function (err) {
+        });
+    });
+
 
 
     $(document).on("click", "#scrape-button", function () {
