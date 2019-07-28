@@ -83,6 +83,16 @@ $(document).ready(function () {
         $("#articles").append(message);
     }
 
+    $(document).on("click", ".btn.save", function () {
+        var article = $(this).parents(".card").data();
+
+        $(this).parents(".card").remove();
+
+        $.post("/articles/save/" + article.id).then(function () {
+        })
+    });
+
+
     $(document).on("click", ".note-button", function () {
         let thisId = $(this).attr("data-id");
         $.ajax({
