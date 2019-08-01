@@ -32,10 +32,10 @@ mongoose.connect(MONGODB_URI);
 
 app.get("/scrape", function (req, res) {
     axios.get("https://www.nytimes.com/section/sports").then(function (response) {
-        var $ = cheerio.load(response.data);
+        let $ = cheerio.load(response.data);
 
         $("div.css-4jyr1y").each(function (i, element) {
-            var result = {};
+            let result = {};
             result.url = $(element).children("a").attr("href");
             result.headline = $(element).children("a").children("h2.css-1dq8tca").text();
             result.summary = $(element).children("a").children("p.css-1echdzn").text();
