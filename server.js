@@ -35,13 +35,13 @@ app.get("/scrape", function (req, res) {
         let $ = cheerio.load(response.data);
 
         $("div.css-4jyr1y").each(function (i, element) {
-            let result = {};
-            result.url = $(element).children("a").attr("href");
+            let result = {}
+            result.url =  $(element).children("a").attr("href");
             result.headline = $(element).children("a").children("h2.css-1dq8tca").text();
             result.summary = $(element).children("a").children("p.css-1echdzn").text();
             result.photo = $(element).find("img").attr("src");
 
-            if (result.headline && result.url) {
+           
                 db.Article.create(result)
                     .then(function (dbArticle) {
                         console.log(dbArticle);
@@ -49,7 +49,7 @@ app.get("/scrape", function (req, res) {
                     .catch(function (err) {
                         console.log(err);
                     });
-            }
+            
         });
         res.sendFile(path.join(__dirname, "public/index.html"));
     });
@@ -64,7 +64,7 @@ app.get("/articles", function (req, res) {
         .catch(function (err) {
             res.json(err);
         });
-});
+})
 
 app.get("/saved", function ( req, res ) {
     res.sendfile("./public/saved.html");
