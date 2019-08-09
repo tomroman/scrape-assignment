@@ -99,15 +99,7 @@ app.get("/articles/:id", function (req, res) {
         });
 });
 
-app.put("/articles/:id", function (req, res) {
-    db.Article.update({ _id: req.params.id }, { $set: { isSaved: true } })
-        .then(function (dbArticle) {
-            res.json(dbArticle);
-        })
-        .catch(function (err) {
-            res.json(err);
-        });
-});
+
 
 app.post("/articles/:id", function (req, res) {
     db.Note.create(req.body)
