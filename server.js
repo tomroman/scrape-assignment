@@ -78,6 +78,14 @@ app.get("/articles/saved", function (req, res) {
     });
 });
 
+app.post("/articles/save/:id", function (req, res) {
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { $set: { saved: true } }, { new: true }).then(function (dbArticle) {
+        res.json(dbArticle);
+    }).catch(function (err) {
+        res.json(err);
+    });
+});
+
 app.delete("/articles/clear", function (req, res) {
     db.Article.deleteMany({}, function (err) {
         console.log(err);
@@ -89,7 +97,7 @@ app.delete("/articles/clear", function (req, res) {
 
 
 app.get("/articles/:id", function (req, res) {
-    db.Article.findOne({ _id: req.params.id })
+    db.Article.find({ _id: req.params.id })
         .populate("note")
         .then(function (dbArticle) {
             res.json(dbArticle);
