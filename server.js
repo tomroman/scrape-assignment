@@ -86,6 +86,15 @@ app.post("/articles/save/:id", function (req, res) {
     });
 });
 
+app.post("/articles/unsave/:id", function (req, res) {
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { $set: { saved: false } }, { new: true }).then(function (dbArticle) {
+        res.json(dbArticle);
+    }).catch(function (err) {
+        res.json(err);
+    });
+});
+
+
 app.delete("/articles/clear", function (req, res) {
     db.Article.deleteMany({}, function (err) {
         console.log(err);
